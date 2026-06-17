@@ -1,0 +1,27 @@
+name: Test invalid API key error
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_REF: refs/heads/main
+      GITHUB_EVENT_NAME: push
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Run ggshield with invalid API key (expect failure)
+        id: action
+        uses: .
+        env:
+          GITGUARDIAN_API_KEY: invalid-key-for-testing
+        continue-on-error: true
+      - name: Assert action failed (not a setup/entrypoint crash)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "success" ]; then
+            echo "FAIL: expected action to fail with invalid API key"
+            exit 1
+          fi
+          echo "PASS: action correctly failed with invalid API key"

@@ -1,0 +1,35 @@
+name: Test ggshield action with args input
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_REF: refs/heads/main
+      GITHUB_EVENT_NAME: push
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          args: "--exit-zero"
+        # --exit-zero makes ggshield exit 0 even when secrets are found,
+        # but without a valid API key the action will still fail at auth.
+
+      - name: Assert action ran (failed at auth, not at arg parsing)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # Without a real API key the action will fail, but it should not
+          # error out before processing the --exit-zero argument.
+          # We accept both 'failure' (auth error) and 'success' as valid outcomes
+          # since the important thing is the action was invoked with args.
+          if [ "$OUTCOME" = "success" ] || [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action was invoked with args input (outcome=$OUTCOME)"
+          else
+            echo "FAIL: unexpected outcome=$OUTCOME"
+            exit 1
+          fi

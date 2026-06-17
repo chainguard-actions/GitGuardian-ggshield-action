@@ -1,0 +1,1 @@
+# GitGuardian-ggshield-action

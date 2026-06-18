@@ -14,6 +14,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | v1.51.0 | [`v1.51.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.51.0) | [`ad41d39`](https://github.com/GitGuardian/ggshield-action/commit/ad41d391f42450e9e6bb34961e3b1cf73398f250) |
 | v1.52.0 | [`v1.52.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.0) | [`4080451`](https://github.com/GitGuardian/ggshield-action/commit/40804514dd29d101ce8bebcc5df7766ca3867c46) |
 | v1.52.1 | [`v1.52.1`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.1) | [`16a0afc`](https://github.com/GitGuardian/ggshield-action/commit/16a0afce4785690fa602b6dbabf60ed22a4a854b) |
+| v1.52.2 | [`v1.52.2`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.2) | [`da20be0`](https://github.com/GitGuardian/ggshield-action/commit/da20be06cafe5e8633dc24744efe1efe8d30f06b) |
 
 ## Privacy
 

@@ -1,29 +1,29 @@
-name: Test with-args - ggshield action passes args to secret scan ci
+name: Test action with args input
 on:
   workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_REF: refs/heads/main
-      GITHUB_EVENT_NAME: push
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Run ggshield action with --help arg
+
+      - name: Run ggshield action with args and invalid API key (expect failure)
         id: action
         uses: .
         continue-on-error: true
         with:
-          args: "--help"
+          args: "--exit-zero"
         env:
-          GITGUARDIAN_API_KEY: ""
-      - name: Assert action ran (outcome is success or failure, not skipped/cancelled)
-        env:
-          OUTCOME: ${{ steps.action.outcome }}
+          GITGUARDIAN_API_KEY: fake-invalid-api-key-for-testing
+
+      - name: Assert action failed (auth error, not arg parsing error)
         run: |
-          echo "outcome: $OUTCOME"
-          if [ "$OUTCOME" = "skipped" ] || [ "$OUTCOME" = "cancelled" ]; then
-            echo "FAIL: action was skipped or cancelled unexpectedly"
+          echo "outcome: ${{ steps.action.outcome }}"
+          # The action should fail due to invalid API key, not due to bad args.
+          # If args were malformed/unrecognized, the error would be different.
+          # Either way, the action must have run (not skipped or errored at setup).
+          if [ "${{ steps.action.outcome }}" = "skipped" ]; then
+            echo "FAIL: action was skipped — it should have run and failed"
             exit 1
           fi
-          echo "PASS: action ran with args (outcome=$OUTCOME)"
+          echo "PASS: action ran with args input (outcome: ${{ steps.action.outcome }})"

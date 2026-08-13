@@ -14,7 +14,7 @@ branding:
   color: "blue"
 runs:
   using: "docker"
-  image: "docker://gitguardian/ggshield@sha256:74a990937b163323c4ffaf3b7f76a856be4617fbae4231563d1db990193f59c4" # v1.49.0
+  image: "docker://gitguardian/ggshield:v1.49.0@sha256:74a990937b163323c4ffaf3b7f76a856be4617fbae4231563d1db990193f59c4"
   entrypoint: "/app/docker/actions-secret-entrypoint.sh"
   args:
     - ${{ inputs.args }}

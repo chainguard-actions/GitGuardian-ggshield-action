@@ -1,0 +1,28 @@
+name: Application Release
+
+on:
+  push:
+    tags:
+      # Trigger workflow on push events for version tags (e.g. v1.28.0) but not for major version tag (e.g. v1)
+      - "v*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70d # v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: |
+            ## Changelog
+          draft: false
+          prerelease: false

@@ -1,21 +1,105 @@
-# GitGuardian/ggshield-action
+# [GitGuardian Shield](https://github.com/GitGuardian/ggshield) GitHub Action
 
-Scan commits for secrets and other issues.
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1-undefined.svg?logo=github&logoColor=white&style=for-the-badge)](https://github.com/marketplace/actions/gitguardian-shield-action)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/gitguardian/ggshield?color=1B2D55&sort=semver&style=for-the-badge&label=ggshield)](https://hub.docker.com/r/gitguardian/ggshield)
+[![License](https://img.shields.io/github/license/GitGuardian/ggshield-action?color=%231B2D55&style=for-the-badge)](LICENSE)
+![GitHub stars](https://img.shields.io/github/stars/gitguardian/ggshield-action?color=%231B2D55&style=for-the-badge)
 
-Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/GitGuardian/ggshield-action](https://github.com/GitGuardian/ggshield-action).
+Find exposed credentials in your commits using [**GitGuardian shield**](https://github.com/GitGuardian/ggshield).
 
-## Versions
+The **GitGuardian shield** (ggshield) is a CLI application that runs in your local environment
+or in a CI environment to help you detect more than 400 types of secrets, as well as other potential security vulnerabilities or policy breaks.
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.49.0 | [`v1.49.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.49.0) | [`ea5c945`](https://github.com/GitGuardian/ggshield-action/commit/ea5c945e66dc6436d976d4c70519c4ff7cadf9ba) |
-| v1.50.0 | [`v1.50.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.0) | [`3359866`](https://github.com/GitGuardian/ggshield-action/commit/33598664f24734b2c3f8eeac2f1bf3db0426a474) |
-| v1.50.3 | [`v1.50.3`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.3) | [`47d27a8`](https://github.com/GitGuardian/ggshield-action/commit/47d27a827db78a2a521d4ed38cf687f2839beb06) |
-| v1.51.0 | [`v1.51.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.51.0) | [`ad41d39`](https://github.com/GitGuardian/ggshield-action/commit/ad41d391f42450e9e6bb34961e3b1cf73398f250) |
-| v1.52.0 | [`v1.52.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.0) | [`4080451`](https://github.com/GitGuardian/ggshield-action/commit/40804514dd29d101ce8bebcc5df7766ca3867c46) |
-| v1.52.1 | [`v1.52.1`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.1) | [`16a0afc`](https://github.com/GitGuardian/ggshield-action/commit/16a0afce4785690fa602b6dbabf60ed22a4a854b) |
-| v1.52.2 | [`v1.52.2`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.2) | [`da20be0`](https://github.com/GitGuardian/ggshield-action/commit/da20be06cafe5e8633dc24744efe1efe8d30f06b) |
-| v1.53.0 | [`v1.53.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.53.0) | [`2002482`](https://github.com/GitGuardian/ggshield-action/commit/2002482fb5990b486be5598ebcf48a8eba393fce) |
+**GitGuardian shield** uses our [public API](https://api.gitguardian.com/doc) through [py-gitguardian](https://github.com/GitGuardian/py-gitguardian) to scan your files and detect potential secrets or issues in your code. **The `/v1/scan` endpoint of the [public API](https://api.gitguardian.com/doc) is stateless. We will not store any files you are sending or any secrets we have detected**.
+
+## Requirements
+
+- A GitGuardian account. [**Sign up now**](https://dashboard.gitguardian.com/api/v1/auth/user/github_login/authorize?utm_source=github&utm_medium=gg_shield&utm_campaign=shield1) if you haven't before!
+- A GitGuardian API Key. You can create your API Key [**here**](https://dashboard.gitguardian.com/api/v1/auth/user/github_login/authorize?utm_source=github&utm_medium=gg_shield&utm_campaign=shield1). The only required scope is `scan`.
+
+## Usage
+
+Add a new job to your GitHub workflow using the `GitGuardian/ggshield-action` action.
+
+```yaml
+name: GitGuardian scan
+
+on: [push, pull_request]
+
+jobs:
+  scanning:
+    name: GitGuardian scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all history so multiple commits can be scanned
+      - name: GitGuardian scan
+        uses: GitGuardian/ggshield-action@v1
+        env:
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+```
+
+Add your [GitGuardian API Key](https://dashboard.gitguardian.com/api/v1/auth/user/github_login/authorize?utm_source=github&utm_medium=gg_shield&utm_campaign=shield1) to the `GITGUARDIAN_API_KEY` secret in your project settings.
+
+## Adding extra options to the action
+
+The action accepts the same extra options as the `ggshield secret scan ci` command. Here is the [command reference](https://docs.gitguardian.com/ggshield-docs/reference/secret/scan/ci).
+
+Example:
+
+```yaml
+name: GitGuardian scan
+
+on: [push, pull_request]
+
+jobs:
+  scanning:
+    name: GitGuardian scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all history so multiple commits can be scanned
+      - name: GitGuardian scan
+        uses: GitGuardian/ggshield-action@v1
+        with:
+          args: -v --ignore-known-secrets
+        env:
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+```
+
+## Examples of GitGuardian scanning
+
+![Scan output example](https://cdn.statically.io/gh/GitGuardian/ggshield-action/51c86f8a/doc/example_output.png)
+
+This a sample scan result from **GitGuardian shield**.
+
+If the secret detected has been revoked and you do not wish to rewrite git history, you can use a value of the policy break (for example: the value of `|_password_|`) or the ignore SHA displayed in your `.gitguardian.yaml` under `matches-ignore`.
+
+An example configuration file is available [here](https://github.com/GitGuardian/ggshield/blob/main/.gitguardian.example.yml).
+
+![Status example](https://cdn.statically.io/gh/GitGuardian/ggshield-action/51c86f8a/doc/status.png)
+
+If there are secret leaks or other security issues in your commit your workflow will be marked as failed.
+
+Be sure to add `GitGuardian scan` to your required status checks in your repository settings to stop pull requests with security issues from being merged.
+
+# License
+
+**GitGuardian shield** is MIT licensed.
 
 ## Privacy
 

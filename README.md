@@ -6,19 +6,19 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.49.0 | [`v1.49.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.49.0) | [`ea5c945`](https://github.com/GitGuardian/ggshield-action/commit/ea5c945e66dc6436d976d4c70519c4ff7cadf9ba) |
-| v1.50.0 | [`v1.50.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.0) | [`3359866`](https://github.com/GitGuardian/ggshield-action/commit/33598664f24734b2c3f8eeac2f1bf3db0426a474) |
-| v1.50.3 | [`v1.50.3`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.3) | [`47d27a8`](https://github.com/GitGuardian/ggshield-action/commit/47d27a827db78a2a521d4ed38cf687f2839beb06) |
-| v1.51.0 | [`v1.51.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.51.0) | [`ad41d39`](https://github.com/GitGuardian/ggshield-action/commit/ad41d391f42450e9e6bb34961e3b1cf73398f250) |
-| v1.52.0 | [`v1.52.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.0) | [`4080451`](https://github.com/GitGuardian/ggshield-action/commit/40804514dd29d101ce8bebcc5df7766ca3867c46) |
-| v1.52.1 | [`v1.52.1`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.1) | [`16a0afc`](https://github.com/GitGuardian/ggshield-action/commit/16a0afce4785690fa602b6dbabf60ed22a4a854b) |
-| v1.52.2 | [`v1.52.2`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.2) | [`da20be0`](https://github.com/GitGuardian/ggshield-action/commit/da20be06cafe5e8633dc24744efe1efe8d30f06b) |
-| v1.53.0 | [`v1.53.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.53.0) | [`2002482`](https://github.com/GitGuardian/ggshield-action/commit/2002482fb5990b486be5598ebcf48a8eba393fce) |
-| v1.54.0 | [`v1.54.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.54.0) | [`7059aef`](https://github.com/GitGuardian/ggshield-action/commit/7059aef1ffb7d2374ce27201144f5613beecefe0) |
-| v1.55.0 | [`v1.55.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.55.0) | [`7f66d3b`](https://github.com/GitGuardian/ggshield-action/commit/7f66d3be9c59a821dcf4f45ee5d929203a1a0b90) |
-| v1.56.0 | [`v1.56.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.56.0) | [`10e9055`](https://github.com/GitGuardian/ggshield-action/commit/10e9055712b4630c3d514ec16dca25c94b752b52) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.49.0 | [`v1.49.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.49.0) | [`ea5c945`](https://github.com/GitGuardian/ggshield-action/commit/ea5c945e66dc6436d976d4c70519c4ff7cadf9ba) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.49.0/HARDENING.md) |
+| v1.50.0 | [`v1.50.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.0) | [`3359866`](https://github.com/GitGuardian/ggshield-action/commit/33598664f24734b2c3f8eeac2f1bf3db0426a474) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.50.0/HARDENING.md) |
+| v1.50.3 | [`v1.50.3`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.50.3) | [`47d27a8`](https://github.com/GitGuardian/ggshield-action/commit/47d27a827db78a2a521d4ed38cf687f2839beb06) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.50.3/HARDENING.md) |
+| v1.51.0 | [`v1.51.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.51.0) | [`ad41d39`](https://github.com/GitGuardian/ggshield-action/commit/ad41d391f42450e9e6bb34961e3b1cf73398f250) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.51.0/HARDENING.md) |
+| v1.52.0 | [`v1.52.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.0) | [`4080451`](https://github.com/GitGuardian/ggshield-action/commit/40804514dd29d101ce8bebcc5df7766ca3867c46) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.52.0/HARDENING.md) |
+| v1.52.1 | [`v1.52.1`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.1) | [`16a0afc`](https://github.com/GitGuardian/ggshield-action/commit/16a0afce4785690fa602b6dbabf60ed22a4a854b) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.52.1/HARDENING.md) |
+| v1.52.2 | [`v1.52.2`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.52.2) | [`da20be0`](https://github.com/GitGuardian/ggshield-action/commit/da20be06cafe5e8633dc24744efe1efe8d30f06b) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.52.2/HARDENING.md) |
+| v1.53.0 | [`v1.53.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.53.0) | [`2002482`](https://github.com/GitGuardian/ggshield-action/commit/2002482fb5990b486be5598ebcf48a8eba393fce) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.53.0/HARDENING.md) |
+| v1.54.0 | [`v1.54.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.54.0) | [`7059aef`](https://github.com/GitGuardian/ggshield-action/commit/7059aef1ffb7d2374ce27201144f5613beecefe0) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.54.0/HARDENING.md) |
+| v1.55.0 | [`v1.55.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.55.0) | [`7f66d3b`](https://github.com/GitGuardian/ggshield-action/commit/7f66d3be9c59a821dcf4f45ee5d929203a1a0b90) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.55.0/HARDENING.md) |
+| v1.56.0 | [`v1.56.0`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/tree/v1.56.0) | [`10e9055`](https://github.com/GitGuardian/ggshield-action/commit/10e9055712b4630c3d514ec16dca25c94b752b52) | [`HARDENING.md`](https://github.com/chainguard-actions/GitGuardian-ggshield-action/blob/v1.56.0/HARDENING.md) |
 
 ## Privacy
 

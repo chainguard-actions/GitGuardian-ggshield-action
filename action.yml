@@ -1,0 +1,20 @@
+name: "GitGuardian Shield Action"
+description: "Scan commits for secrets and other issues."
+author: GitGuardian <support@gitguardian.com>
+
+inputs:
+  args:
+    description: |
+      Arguments to pass to `ggshield secret scan ci`.
+
+      [`ggshield secret scan ci` reference](https://docs.gitguardian.com/ggshield-docs/reference/secret/scan/ci).
+    required: false
+branding:
+  icon: "shield"
+  color: "blue"
+runs:
+  using: "docker"
+  image: "docker://gitguardian/ggshield:v1.57.0@sha256:d3d524a9c4b8ec938c75f5a2517b1c53805e141d5b57eeedd42ceb402c3285ff"
+  entrypoint: "/app/docker/actions-secret-entrypoint.sh"
+  args:
+    - ${{ inputs.args }}
